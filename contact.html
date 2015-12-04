@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+
+<!--This code was created by Log10 team member, Tyler Protivnak, on 11/27/2014. It was last updated on 12/2/2014-->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Contact us</title>
+</head>
+<body bgcolor="#DF7620">
+
+    <h2 align="center">
+
+        <font color="blue">
+            Contact Us
+        </font>
+        
+    </h2>
+
+    <form action="mailto:#@pitt.edu?subject=Contact Info" method="post" enctype="text/plain">
+
+        <!--This section is for the users input-->
+
+        <p>
+
+            Please enter your first and last name
+            <input type="text" name="name" id="userName" value="" size="30" />
+            <br />
+
+        </p>
+
+        <!--This section is where a textarea is used-->
+
+        <textarea name="comments" rows="5" cols="25" id="inputText" wrap="hard">
+            
+Please enter your comment, questions, and/or concerns here...
+                
+        </textarea>
+
+        <!--This section is where radio buttons are used-->
+
+        <p>
+            How old are you?<br />
+            <input type="radio" name="age" id="age1" value="18-19" />18-19<br />
+            <input type="radio" name="age" id="age2" value="20s" />20s<br />
+            <input type="radio" name="age" id="age3" value="30s" />30s<br />
+            <input type="radio" name="age" id="age4" value="40s" />40s<br />
+            <input type="radio" name="age" id="age5" value="50+" />50+<br />
+            <input type="radio" name="age" id="age6" value="Decline to answer" checked/>Decline to answer<br />
+
+        </p>
+
+        <!--This section is where checkboxes are used-->
+
+        <p>
+            Which of our products have you tried?<br />
+            <input type="checkbox" name="product" id="product1" value="Plain" />Plain<br />
+            <input type="checkbox" name="product" id="product2" value="Pepperoni" />Pepperoni<br />
+            <input type="checkbox" name="product" id="product3" value="Margherita" />Margherita<br />
+            <input type="checkbox" name="product" id="product4" value="Pesto Chicken" />Pesto Chicken<br />
+            <input type="checkbox" name="product" id="product5" value="Meat Lover's" />Meat Lover's<br />
+            <input type="checkbox" name="product" id="product6" value="Quattro Stagioni" />Quattro Stagioni<br />
+
+        </p>
+
+        <!--This section is where a scroll box is used-->
+
+        <p>
+            How did you feel about the quality of our product?
+
+            <select name="quality" id="userQuality">
+
+                <option>Pleased</option>
+                <option>Content</option>
+                <option>Neutral</option>
+                <option>Disappointed</option>
+                <option>I won't be returning</option>
+
+            </select>
+        </p>
+
+        <!--This section is where a drop down box is used-->
+
+        <p>
+            How likely are you to recommend our product to someone else?
+
+            <select name="recommendation" id="userRecommendation">
+
+                <option>Already did</option>
+                <option>Likely</option>
+                <option>Unsure</option>
+                <option>Probaby won't</option>
+                <option>You're kidding, right?</option>
+
+            </select>
+        </p>
+
+
+
+        <input type="reset" name="ResetButton" id="resetButton" value="Reset the form" />
+        <input type="submit" name="SubmitButton" id="submitButton" value="Submit" />
+
+    </form>
+
+    <!--This section is for the results of the input data-->
+
+    <h2>Results</h2>
+
+    <p>
+        Name: <span id="resultName"></span>
+
+        <br />
+
+        Comments: <span id="resultComments"></span>
+
+        <br />
+
+        Age: <span id="resultAge"></span>
+
+        <br />
+
+        Products used: <span id="resultProducts"></span>
+
+        <br />
+
+        Your experience: <span id="resultExperience"></span>
+
+        <br />
+
+        Recommendation: <span id="resultRecommendation"></span>
+
+        <br />
+
+    </p>
+
+    <!--This section is the javascript that will be used to update the data on the button click-->
+
+    <script type="text/javascript">
+
+        function updateResults() {
+
+            var u = 0, displayProductsList = "", addComma = 0;
+            var displayName = document.getElementById("userName")
+            var displayComments = document.getElementsByName("comments");
+            var displayAge = document.getElementsByName("age");
+            var displayProducts = document.getElementsByName("product");
+            var displayExperience = document.getElementById("userQuality");
+            var displayRecommendation = document.getElementById("userRecommendation");
+
+            for (i = 0; i <= 6; i = i + 1) {
+
+                if (displayAge[i].checked == true) {
+
+                    document.getElementById("resultAge").innerHTML = displayAge[i].value;
+
+                    break;
+
+                }
+
+            }
+           
+            for (j = 0; j <= 5; j = j + 1) {
+
+                if (displayExperience[j].selected == true) {
+
+                    document.getElementById("resultExperience").innerHTML = displayExperience[j].value;
+
+                    break;
+
+                }
+
+            }
+
+            for (k = 0; k <= 5; k = k + 1) {
+
+                if (displayRecommendation[k].selected == true) {
+
+                    document.getElementById("resultRecommendation").innerHTML = displayRecommendation[k].value;
+
+                    break;
+
+                }
+
+            }
+
+            while (u < displayProducts.length) {
+
+                if (displayProducts[u].checked == 1) {
+
+                    if (addComma == 1) {
+
+                        displayProductsList = displayProductsList + ", ";
+
+                    }
+
+                    displayProductsList = displayProductsList + displayProducts[u].value;
+                    addComma = 1;
+
+                }
+
+                u = u + 1
+
+            }
+
+            document.getElementById("resultName").innerHTML = displayName.value;
+
+            document.getElementById("resultComments").innerHTML = displayComments[0].value;
+
+            document.getElementById("resultProducts").innerHTML = displayProductsList;
+
+
+
+        }
+
+
+
+    </script>
+
+    <!--This section is the button that will update the data-->
+
+    <button onclick="updateResults()">
+        Click to display<br />
+        the results
+    </button>
+
+</body>
+</html>
